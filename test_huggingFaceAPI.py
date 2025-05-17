@@ -5,9 +5,9 @@ async def main():
     service = TranslationService()
     source_text = "Hello, how are you?"
     source_lang = "en"
-    target_langs = ["fr"]  # Add more if you want
+    target_langs = ["bg","cs","da","de","el","et","fi","fr","hu","lt","sk","sv"]  # Add more if you want
 
-    results = await service.translate_text(source_text, source_lang, target_langs)
+    results = await service.translate_text(source_text, target_langs)
 
     for result in results:
         print(f"{result.target_lang}: {result.translated_text}")
