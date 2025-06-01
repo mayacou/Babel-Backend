@@ -14,7 +14,6 @@ click==8.1.8
 cryptography==44.0.2
 datasets==3.5.0
 dill==0.3.8
-docx==0.2.4
 exceptiongroup==1.2.2
 fastapi==0.115.12
 filelock==3.18.0

@@ -12,13 +12,13 @@ async def translate_file(request: FileTranslationRequest):
 
         text_to_translate, text_map = await file_service.extract_text(request.file)
 
-        # CHUNKING - Please use text_chunks where it is needed it returns a list of strings
-        max_word_length = get_max_word_length(request.target_languages)
-        text_chunks = chunk_text(text_to_translate, max_word_length)
+    
+        # max_word_length = get_max_word_length(request.target_languages)
+        # text_chunks = chunk_text(text_to_translate, max_word_length)
 
         translator = TranslationService()
         translated_texts = await translator.translate_text(
-            text_to_translate, # CHUNKING - replace with text_chunks, make sure list of strings works with it
+            text_to_translate, 
             request.source_language,
             request.target_languages,
         )

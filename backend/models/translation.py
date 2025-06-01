@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 class TranslatedText(BaseModel):
     target_lang: str
@@ -9,3 +10,11 @@ class TranslatedFile(BaseModel):
     file_type: str
     filename: str
     base64_content: str
+
+class TranslationRequest(BaseModel):
+    source_text: str
+    source_lang: str
+    target_langs: List[str]
+
+class TranslationResponse(BaseModel):
+    translations: List[TranslatedText]

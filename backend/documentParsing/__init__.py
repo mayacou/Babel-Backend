@@ -1,0 +1,1 @@
+#treat document parsing as a package
