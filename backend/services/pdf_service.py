@@ -2,8 +2,13 @@ import base64
 import tempfile
 from io import BytesIO
 from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
 from documentParsing.parsers.pdf_parser import parse_controller
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
+
+pdfmetrics.registerFont(TTFont('NotoSans', './documentParsing/fonts/NotoSans-Regular.ttf'))
 
 class PDFService:
 
@@ -25,17 +30,19 @@ class PDFService:
     
     def write_text_to_memory(self, text: str) -> BytesIO:
         buffer = BytesIO()
-        c = canvas.Canvas(buffer, pagesize=A4)
-        width, height = A4
-        x = 50
-        y = height - 50
-        line_height = 12
+        doc = SimpleDocTemplate(buffer, pagesize=A4)
+        
+        styles = getSampleStyleSheet()
+        style = styles['Normal']
+        style.fontName = 'NotoSans'
+        style.fontSize = 12
+        style.leading = 14
+
+        story = []
         for line in text.splitlines():
-            if y < 50:
-                c.showPage()
-                y = height - 50
-            c.drawString(x, y, line)
-            y -= line_height
-        c.save()
+            story.append(Paragraph(line, style))
+            story.append(Spacer(1, 6))
+
+        doc.build(story)
         buffer.seek(0)
         return buffer
