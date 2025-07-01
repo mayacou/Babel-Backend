@@ -1,13 +1,14 @@
 from docx.shared import Inches
 from io import BytesIO
 from docx.oxml.ns import nsmap
+from docx import Document
 
 def overlay_docx(doc, text_map, translated_texts, image_map):
    # Create a lookup for images by OCR text for faster access
    image_lookup = {img['ocr_text']: img for img in image_map}
-    
-   # Go through each text entry with its translation
-   for entry, translated in zip(text_map, translated_texts):
+   doc = Document()
+   doc.add_paragraph("")
+   for entry, translated in list(zip(text_map, translated_texts)):
       try:
          if entry["type"] == "paragraph":
             process_paragraph(doc, entry, translated)
