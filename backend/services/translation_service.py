@@ -4,7 +4,7 @@ import asyncio
 import traceback
 from models.translation import TranslatedText
 
-API_URL = "https://mayacou-babel-router-api.hf.space/translate"
+API_URL = "https://babelseniordesignteam-babel-router-api.hf.space/translate"
 MAX_RETRIES = 3
 TIMEOUT = 60 * 10
 
